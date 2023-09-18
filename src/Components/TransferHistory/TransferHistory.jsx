@@ -23,7 +23,9 @@ const FilterIcon = () => {
 const TransferHistory = () => {
   const { userData } = React.useContext(GlobalContext);
 
-  console.log(userData);
+  React.useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   return (
     <section className={'g-wrapper'}>
@@ -92,8 +94,6 @@ const TransferHistory = () => {
               <p>Nenhuma transferência registrada!</p>
             </li>
           )}
-          {/* Carregar aqui com base no estado global
-          do provider */}
         </ol>
       </div>
     </section>

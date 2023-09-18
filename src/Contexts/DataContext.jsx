@@ -9,23 +9,24 @@ const DataContext = ({ children }) => {
   });
 
   const addRegister = (category, shortDescription, value) => {
-    const tempOldData = userData;
-
-    if (Array.isArray(tempOldData?.actualMonthRegisters)) {
-      tempOldData.actualMonthRegisters.push({
-        shortDescription,
-        category,
-        value,
-        createdAt: moment(),
-        // moment().isBefore, isAfter
-      });
-
-      setUserData(tempOldData);
-    }
+    setUserData((prevData) => {
+      return {
+        ...prevData,
+        actualMonthRegisters: [
+          ...prevData.actualMonthRegisters,
+          {
+            shortDescription,
+            category,
+            value,
+            createdAt: moment(),
+          },
+        ],
+      };
+    });
   };
 
   React.useEffect(() => {
-    const hasLocalStorageData = localStorage.setItem(
+    localStorage.setItem(
       'userData',
       JSON.stringify({
         isLogged: true,
@@ -35,10 +36,8 @@ const DataContext = ({ children }) => {
     addRegister('Alimentos', 'iFood', -5000.0);
     addRegister('Casa', 'Esposa Tainá', -400.0);
 
-    console.log('data:', hasLocalStorageData);
+    // console.log('data:', hasLocalStorageData);
   }, []);
-
-  // React.useEffect(() => {}, []);
 
   return (
     <GlobalContext.Provider value={{ userData, setUserData, addRegister }}>

@@ -3,16 +3,56 @@ import style from './RegisterButton.module.css';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import categoryMap from '../../data/categoryMap';
+import { GlobalContext } from '../../Contexts/DataContext';
 
 const RegisterButton = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [activeMenu, setActiveMenu] = React.useState(null);
+  const [error, setError] = React.useState('');
+  const { addRegister } = React.useContext(GlobalContext);
+  const [inputData, setInputData] = React.useState({
+    shortDescription: '',
+    category: 'Alimentos',
+    value: '',
+  });
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
+    setInputData({
+      shortDescription: '',
+      category: 'Alimentos',
+      value: '',
+    });
 
-    // colocar timeout antes de resetar?
-    setActiveMenu(null);
+    setTimeout(() => {
+      setActiveMenu(null);
+    }, 400);
+  };
+
+  const handleAddRegister = () => {
+    if (!(inputData.category && inputData.category && inputData.value)) {
+      setError('Preencha todos os campos!');
+      // toggleDrawer();
+      return;
+    }
+
+    if (activeMenu === 'outgoing') {
+      addRegister(
+        inputData.category,
+        inputData.shortDescription,
+        -inputData.value
+      );
+    }
+
+    if (activeMenu === 'income') {
+      addRegister(
+        inputData.category,
+        inputData.shortDescription,
+        inputData.value
+      );
+    }
+
+    toggleDrawer();
   };
 
   return (
@@ -52,36 +92,68 @@ const RegisterButton = () => {
                 <h3 className={style.menuTitle}>Registro de despesa</h3>
                 <div className={style.inputs}>
                   <div className={style.inputContainer}>
-                    <label htmlFor='outgoingDescription'>Breve descrição</label>
+                    <label
+                      className={style.label}
+                      htmlFor='outgoingDescription'
+                    >
+                      Breve descrição
+                    </label>
                     <input
                       className={style.input}
                       type='text'
-                      placeholder='Nome da despesa'
+                      placeholder='Ex: iFood'
+                      value={inputData.shortDescription}
+                      onInput={({ target }) => {
+                        setInputData((prevData) => ({
+                          ...prevData,
+                          shortDescription: target.value,
+                        }));
+                      }}
                       name='outgoingDescription'
                       id='outgoingDescription'
                     />
                   </div>
                   <div className={style.twoColumns}>
                     <div className={style.inputContainer}>
-                      <label htmlFor='outgoingCategory'>Categoria</label>
+                      <label className={style.label} htmlFor='outgoingCategory'>
+                        Categoria
+                      </label>
                       <select
                         className={style.input}
                         name='outgoingCategory'
                         id='outgoingCategory'
+                        onChange={({ target }) => {
+                          setInputData((prevData) => ({
+                            ...prevData,
+                            category: target.value,
+                          }));
+                        }}
+                        value={inputData.category}
                       >
                         {categoryMap.map(({ code }) => (
-                          <option value={code}>{code}</option>
+                          <option key={code} value={code}>
+                            {code}
+                          </option>
                         ))}
                       </select>
                     </div>
 
                     <div className={style.inputContainer}>
-                      <label htmlFor='outgoingValue'>Valor da despesa</label>
+                      <label className={style.label} htmlFor='outgoingValue'>
+                        Valor
+                      </label>
                       <div className={style.inputRelative}>
                         <input
                           className={`${style.input} ${style.valueInput}`}
                           type='number'
                           placeholder='44.25'
+                          value={inputData.value}
+                          onInput={({ target }) => {
+                            setInputData((prevData) => ({
+                              ...prevData,
+                              value: target.value,
+                            }));
+                          }}
                           name='outgoingValue'
                           id='outgoingValue'
                         />
@@ -94,6 +166,7 @@ const RegisterButton = () => {
             ) : null}
             {activeMenu === 'income' ? <div>income menu</div> : null}
 
+            {error ? <span className={style.error}>{error}</span> : null}
             <div className={style.bottomButtons}>
               <button
                 onClick={toggleDrawer}
@@ -106,7 +179,12 @@ const RegisterButton = () => {
                 Fechar
               </button>
               {activeMenu === 'income' || activeMenu === 'outgoing' ? (
-                <button className={style.purpleButton}>Adicionar</button>
+                <button
+                  onClick={handleAddRegister}
+                  className={style.purpleButton}
+                >
+                  Adicionar
+                </button>
               ) : null}
             </div>
           </div>
