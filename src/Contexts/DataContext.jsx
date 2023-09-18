@@ -33,9 +33,7 @@ const DataContext = ({ children }) => {
       })
     );
 
-    addRegister('Alimentos', 'iFood', -500.0);
-
-    // console.log('data:', hasLocalStorageData);
+    addRegister('Alimentos', 'iFood', -86.0);
   }, []);
 
   return (

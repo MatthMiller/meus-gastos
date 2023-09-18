@@ -45,7 +45,7 @@ const RegisterButton = () => {
     }
 
     if (activeMenu === 'income') {
-      addRegister('Rendimentos', inputData.shortDescription, --inputData.value);
+      addRegister('Rendimentos', inputData.shortDescription, +inputData.value);
     }
 
     toggleDrawer();

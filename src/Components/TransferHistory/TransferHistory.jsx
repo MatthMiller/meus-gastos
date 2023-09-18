@@ -2,6 +2,7 @@ import React from 'react';
 import style from './TransferHistory.module.css';
 import categoryMap from '../../data/categoryMap';
 import { GlobalContext } from '../../Contexts/DataContext';
+import moment from 'moment';
 
 const FilterIcon = () => {
   return (
@@ -22,10 +23,28 @@ const FilterIcon = () => {
 
 const TransferHistory = () => {
   const { userData } = React.useContext(GlobalContext);
+  const [filteredItems, setFilteredItems] = React.useState(null);
 
+  // Organiza pelo mais recente
   React.useEffect(() => {
-    console.log(userData);
+    if (userData && userData?.actualMonthRegisters.length) {
+      const tempData = [...userData.actualMonthRegisters];
+
+      tempData.sort((a, b) => {
+        if (moment(a.createdAt).isBefore(b.createdAt)) {
+          return 1;
+        }
+        if (moment(a.createdAt).isAfter(b.createdAt)) {
+          return -1;
+        }
+        return 0;
+      });
+
+      setFilteredItems(tempData);
+    }
   }, [userData]);
+
+  React.useEffect(() => {}, [filteredItems]);
 
   return (
     <section className={'g-wrapper'}>
@@ -38,8 +57,10 @@ const TransferHistory = () => {
         </div>
 
         <ol className={style.history}>
-          {userData && userData?.actualMonthRegisters.length ? (
-            userData.actualMonthRegisters.map((actualRegister) => {
+          {userData &&
+          userData?.actualMonthRegisters.length &&
+          filteredItems ? (
+            filteredItems.map((actualRegister) => {
               const categoryData = categoryMap.filter(
                 ({ code }) => code === actualRegister.category
               )[0];

@@ -19,7 +19,6 @@ const Balance = () => {
       let income = 0;
 
       userData.actualMonthRegisters.forEach((actualRegister) => {
-        console.log(actualRegister);
         if (actualRegister.value < 0) {
           outgoing += actualRegister.value;
         } else {
@@ -28,7 +27,6 @@ const Balance = () => {
       });
 
       setBalance({ income, outgoing, total: income + outgoing });
-      console.log(outgoing, income, outgoing + income);
     }
   }, [userData]);
 

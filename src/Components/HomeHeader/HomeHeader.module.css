@@ -40,8 +40,8 @@
 }
 
 .profilePicture {
-    height: 42;
-    width: 42;
+    height: 40px;
+    width: 40px;
     /* border: 1px solid rgba(8, 8, 8, 0.50); */
     border-radius: 50%;
 }
