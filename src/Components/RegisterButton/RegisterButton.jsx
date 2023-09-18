@@ -23,6 +23,7 @@ const RegisterButton = () => {
       category: 'Alimentos',
       value: '',
     });
+    setError('');
 
     setTimeout(() => {
       setActiveMenu(null);
@@ -32,7 +33,6 @@ const RegisterButton = () => {
   const handleAddRegister = () => {
     if (!(inputData.category && inputData.category && inputData.value)) {
       setError('Preencha todos os campos!');
-      // toggleDrawer();
       return;
     }
 

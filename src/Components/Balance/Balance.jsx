@@ -2,9 +2,35 @@ import React from 'react';
 import style from './Balance.module.css';
 import trendingUpIcon from '../../assets/indicators/trending-up.svg';
 import trendingDownIcon from '../../assets/indicators/trending-down.svg';
+import { GlobalContext } from '../../Contexts/DataContext';
 
 const Balance = () => {
   const [isValueVisible, setIsValueVisible] = React.useState(true);
+  const [balance, setBalance] = React.useState({
+    income: 0,
+    outgoing: 0,
+    total: 0,
+  });
+  const { userData } = React.useContext(GlobalContext);
+
+  React.useEffect(() => {
+    if (userData && userData?.actualMonthRegisters.length) {
+      let outgoing = 0;
+      let income = 0;
+
+      userData.actualMonthRegisters.forEach((actualRegister) => {
+        console.log(actualRegister);
+        if (actualRegister.value < 0) {
+          outgoing += actualRegister.value;
+        } else {
+          income += actualRegister.value;
+        }
+      });
+
+      setBalance({ income, outgoing, total: income + outgoing });
+      console.log(outgoing, income, outgoing + income);
+    }
+  }, [userData]);
 
   return (
     <section className='g-wrapper'>
@@ -12,7 +38,12 @@ const Balance = () => {
         <div>
           <p className={style.label}>Saldo atual</p>
           <div className={style.balanceValue}>
-            <p>R$ 1.450,00</p>
+            <p>
+              {balance.total < 0 ? '-' : null}
+              <span className={style.whitespace}> </span>R$
+              <span className={style.whitespace}> </span>
+              {Math.abs(balance.total).toFixed(2).replace('.', ',')}
+            </p>
             {!isValueVisible ? <div className={style.blurLayer}></div> : null}
           </div>
         </div>
@@ -35,7 +66,8 @@ const Balance = () => {
             <p className={style.label}>Receitas</p>
             <div className={style.indicatorValue}>
               <p>
-                R$<span className={style.whitespace}> </span>1.650,00
+                R$<span className={style.whitespace}> </span>
+                {balance.income.toFixed(2).replace('.', ',')}
               </p>
               {!isValueVisible ? <div className={style.blurLayer}></div> : null}
             </div>
@@ -49,7 +81,8 @@ const Balance = () => {
             <p className={style.label}>Despesas</p>
             <div className={style.indicatorValue}>
               <p>
-                R$<span className={style.whitespace}> </span>250,00
+                R$<span className={style.whitespace}> </span>
+                {Math.abs(balance.outgoing).toFixed(2).replace('.', ',')}
               </p>
               {!isValueVisible ? <div className={style.blurLayer}></div> : null}
             </div>
