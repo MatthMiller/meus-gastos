@@ -171,7 +171,7 @@ const RegisterButton = () => {
                     <input
                       className={style.input}
                       type='text'
-                      placeholder='Ex: iFood'
+                      placeholder='Ex: Salário'
                       value={inputData.shortDescription}
                       onInput={({ target }) => {
                         setInputData((prevData) => ({
