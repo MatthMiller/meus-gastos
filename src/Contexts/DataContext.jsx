@@ -25,17 +25,6 @@ const DataContext = ({ children }) => {
     });
   };
 
-  React.useEffect(() => {
-    localStorage.setItem(
-      'userData',
-      JSON.stringify({
-        isLogged: true,
-      })
-    );
-
-    addRegister('Alimentos', 'iFood', -86.0);
-  }, []);
-
   return (
     <GlobalContext.Provider value={{ userData, setUserData, addRegister }}>
       {children}
