@@ -45,11 +45,7 @@ const RegisterButton = () => {
     }
 
     if (activeMenu === 'income') {
-      addRegister(
-        inputData.category,
-        inputData.shortDescription,
-        inputData.value
-      );
+      addRegister('Rendimentos', inputData.shortDescription, --inputData.value);
     }
 
     toggleDrawer();
@@ -164,7 +160,54 @@ const RegisterButton = () => {
                 </div>
               </div>
             ) : null}
-            {activeMenu === 'income' ? <div>income menu</div> : null}
+            {activeMenu === 'income' ? (
+              <div>
+                <h3 className={style.menuTitle}>Registro de receita</h3>
+                <div className={style.inputs}>
+                  <div className={style.inputContainer}>
+                    <label className={style.label} htmlFor='incomeDescription'>
+                      Breve descrição
+                    </label>
+                    <input
+                      className={style.input}
+                      type='text'
+                      placeholder='Ex: iFood'
+                      value={inputData.shortDescription}
+                      onInput={({ target }) => {
+                        setInputData((prevData) => ({
+                          ...prevData,
+                          shortDescription: target.value,
+                        }));
+                      }}
+                      name='incomeDescription'
+                      id='incomeDescription'
+                    />
+                  </div>
+                  <div className={style.inputContainer}>
+                    <label className={style.label} htmlFor='incomeValue'>
+                      Valor
+                    </label>
+                    <div className={style.inputRelative}>
+                      <input
+                        className={`${style.input} ${style.valueInput}`}
+                        type='number'
+                        placeholder='44.25'
+                        value={inputData.value}
+                        onInput={({ target }) => {
+                          setInputData((prevData) => ({
+                            ...prevData,
+                            value: target.value,
+                          }));
+                        }}
+                        name='incomeValue'
+                        id='incomeValue'
+                      />
+                      <span className={style.realDecorator}>R$</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : null}
 
             {error ? <span className={style.error}>{error}</span> : null}
             <div className={style.bottomButtons}>
