@@ -1,0 +1,126 @@
+.label {
+   color: #929292; 
+   font-size: .875rem;
+   line-height: 1;
+}
+
+.balanceContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #080808;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.20);
+    border-radius: 5px;
+    padding: 18px 15px;
+    user-select: none;
+}
+
+.balanceValue {
+    font-size: 1.25rem;
+    line-height: 1;
+    color: #F5F5F5;
+    font-family: 'Ubuntu Mono';
+    margin-top: 6px;
+    position: relative;
+}
+
+.visibilityIconContainer {
+    display: flex;
+    align-items: center;
+}
+
+.iconPadding {
+    display: flex;
+    padding: 5px;
+    border-radius: 5px;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+@media (pointer: fine) {
+    .iconPadding:hover {
+        background-color: #181818;
+    }
+
+    .iconPadding:hover path {
+        fill: #F5F5F5;
+    }
+}
+
+@media (pointer: coarse) {
+    .iconPadding:active {
+        background-color: #181818;
+    }
+
+    .iconPadding:active path {
+        fill: #F5F5F5;
+    }
+}
+
+.visibilityIconContainer path {
+    transition: 200ms;
+}
+
+.indicators {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.incomeContainer,
+.outgoingContainer {
+    display: flex;
+    align-items: flex-end;
+    gap: 9px;
+}
+
+.iconBackground {
+    padding: 9px;
+    border-radius: 10px;
+}
+
+.incomeContainer .iconBackground { background-color: #74AD59; }
+.outgoingContainer .iconBackground { background-color: #A13E3E; }
+.outgoingContainer .indicatorValue { color: #D76B6B; }
+.incomeContainer .indicatorValue { color: #9AC984; }
+
+.indicatorInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.indicatorValue {
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 1rem;
+    line-height: 1;
+    position: relative;
+}
+
+.whitespace {
+    font-family: 'Ubuntu';
+}
+
+.blurLayer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    transition: 150ms;
+    border-radius: 2px;
+    background-color: #626161;
+    background: radial-gradient(circle at 18.7% 37.8%, #B5B5B5 0%, #626161 90%);
+
+    animation-name: fadeInBlurLayer;
+    animation-duration: 150ms;
+}
+
+@keyframes fadeInBlurLayer {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}

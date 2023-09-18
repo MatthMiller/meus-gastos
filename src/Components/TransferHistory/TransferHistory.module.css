@@ -1,0 +1,126 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+}
+
+.sectionTitle {
+    font-family: 'Ubuntu';
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1;
+}
+
+.iconPadding {
+    display: flex;
+    padding: 5px;
+    border-radius: 5px;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+@media (pointer: fine) {
+    .iconPadding:hover {
+        background-color: #181818;
+    }
+
+    .iconPadding:hover path {
+        fill: #F5F5F5;
+    }
+}
+
+@media (pointer: coarse) {
+    .iconPadding:active {
+        background-color: #181818;
+    }
+
+    .iconPadding:active path {
+        fill: #F5F5F5;
+    }
+}
+
+.history {
+    background-color: #181818;
+    border-radius: 5px;
+    margin-top: 12px;
+    padding: 18px 12px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.20);
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.noHistory {
+    text-align: center;
+    margin: 20px 0px;
+    font-size: 1rem;
+    line-height: 1;
+    color: #929292;
+}
+
+.register {
+    display: flex;
+    user-select: none;
+    justify-content: space-between;
+}
+
+.left {
+    display: flex;
+    gap: 9px;
+}
+
+.iconBackground {
+    padding: 6px;
+    border-radius: 5px;
+}
+
+.leftInfo {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    flex-direction: column;
+}
+
+.shortDescription {
+    font-size: 1rem;
+    line-height: 1;
+    color: #E6E6E6;
+}
+
+.category {
+    font-size: .875rem;
+    line-height: 1;
+    color: #929292;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    text-align: right;
+}
+
+.negative,
+.positive {
+    font-size: 1rem;
+    line-height: 1;
+    font-family: 'Ubuntu Mono';
+}
+
+.negative {
+    color: #D76B6B;
+}
+
+.positive {
+    color: #9AC984;
+}
+
+.date {
+    font-weight: 300;
+    color: #929292;
+    font-size: .875rem;
+    line-height: 1;
+}
