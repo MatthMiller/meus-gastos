@@ -60,6 +60,11 @@
     gap: 18px;
 }
 
+.bottomButtons {
+    display: flex;
+    gap: 12px;
+}
+
 .greenButton,
 .redButton,
 .purpleButton {
@@ -90,6 +95,10 @@
     background-color: #754CCD;
 }
 
+.purpleGhostButton {
+    background-color: transparent !important;
+}
+
 @media (pointer: fine) {
     .greenButton:hover {
         background-color: #74AD59;
@@ -118,4 +127,68 @@
         border-color: #9F7AEE;
         background-color: #9F7AEE;
     }
+}
+
+.menuTitle {
+    font-size: 1.125rem;
+    line-height: 1;
+    color: #F5F5F5;
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+
+.twoColumns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+select.input {
+    height: 36px;
+}
+
+.input {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #1A1A1A;
+    border: 1px solid #0D0D0D;
+    border-radius: 4px;
+    transition: 200ms;
+    outline: transparent;
+    margin-top: 5px;
+    color: #F5F5F5;
+}
+  
+.input::placeholder {
+    color: #848484;
+    font-family: 'Ubuntu';
+}
+  
+.input:focus {
+    border-color: #754CCD;
+    box-shadow: 0 0 0 2px #C0A3FF;
+}
+
+.inputRelative {
+    position: relative;
+}
+
+.realDecorator {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+}
+
+.valueInput {
+    padding-left: calc(12px + 12px + 12px);
 }
