@@ -8,8 +8,6 @@ Projeto desenvolvido para o processo seletivo SenseData, utilizando React.js e c
 
 ### Instação
 
-In the project directory, you can run:
-
 ```
 npm start
 ```
