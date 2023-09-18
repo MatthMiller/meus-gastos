@@ -44,6 +44,10 @@ const RegisterButton = () => {
               <button className={style.redButton}>Adicionar despesa</button>
               <button className={style.greenButton}>Adicionar receita</button>
             </div>
+
+            <button onClick={toggleDrawer} className={style.purpleButton}>
+              Fechar
+            </button>
           </div>
         </div>
       </Drawer>
